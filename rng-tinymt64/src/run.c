@@ -20,18 +20,14 @@
 #include "tinymt64.h"
 
 int main(int argc, char * argv[]) {
-    if (argc < 4) {
-	printf("%s mat1 mat2 tmat [seed]\n", argv[0]);
-	return -1;
-    }
     tinymt64_t tinymt;
-    tinymt.mat1 = strtoul(argv[1], NULL, 16);
-    tinymt.mat2 = strtoul(argv[2], NULL, 16);
-    tinymt.tmat = strtoull(argv[3], NULL, 16);
+    tinymt.mat1 = strtoul("2406486510", NULL, 16);
+    tinymt.mat2 = strtoul("4235788063", NULL, 16);
+    tinymt.tmat = strtoul("932445695", NULL, 16);
     int seed = 1;
     uint64_t seed_array[5];
     if (argc >= 5) {
-	seed = strtol(argv[4], NULL, 0);
+        seed = strtol(argv[4], NULL, 0);
     }
     printf("tinymt64 0x%08"PRIx32, tinymt.mat1);
     printf(" 0x%08"PRIx32, tinymt.mat2);
@@ -40,41 +36,41 @@ int main(int argc, char * argv[]) {
     tinymt64_init(&tinymt, seed);
     printf("64-bit unsigned integers r, where 0 <= r < 2^64\n");
     for (int i = 0; i < 10; i++) {
-	for (int j = 0; j < 3; j++) {
-	    printf("%20"PRIu64" ", tinymt64_generate_uint64(&tinymt));
-	}
-	printf("\n");
+    for (int j = 0; j < 3; j++) {
+        printf("%20"PRIu64" ", tinymt64_generate_uint64(&tinymt));
+    }
+    printf("\n");
     }
     printf("init_by_array {%d}\n", seed);
     seed_array[0] = seed;
     tinymt64_init_by_array(&tinymt, seed_array, 1);
     printf("double numbers r, where 0.0 <= r < 1.0\n");
     for (int i = 0; i < 12; i++) {
-	for (int j = 0; j < 4; j++) {
-	    printf("%.15f ", tinymt64_generate_double(&tinymt));
-	}
-	printf("\n");
+    for (int j = 0; j < 4; j++) {
+        printf("%.15f ", tinymt64_generate_double(&tinymt));
+    }
+    printf("\n");
     }
     printf("double numbers r, where 1.0 <= r < 2.0\n");
     for (int i = 0; i < 12; i++) {
-	for (int j = 0; j < 4; j++) {
-	    printf("%.15f ", tinymt64_generate_double12(&tinymt));
-	}
-	printf("\n");
+    for (int j = 0; j < 4; j++) {
+        printf("%.15f ", tinymt64_generate_double12(&tinymt));
+    }
+    printf("\n");
     }
     printf("double numbers r, where 0.0 < r <= 1.0\n");
     for (int i = 0; i < 12; i++) {
-	for (int j = 0; j < 4; j++) {
-	    printf("%.15f ", tinymt64_generate_doubleOC(&tinymt));
-	}
-	printf("\n");
+    for (int j = 0; j < 4; j++) {
+        printf("%.15f ", tinymt64_generate_doubleOC(&tinymt));
+    }
+    printf("\n");
     }
     printf("double numbers r, where 0.0 <= r < 1.0\n");
     for (int i = 0; i < 12; i++) {
-	for (int j = 0; j < 4; j++) {
-	    printf("%.15f ", tinymt64_generate_doubleOO(&tinymt));
-	}
-	printf("\n");
+    for (int j = 0; j < 4; j++) {
+        printf("%.15f ", tinymt64_generate_doubleOO(&tinymt));
+    }
+    printf("\n");
     }
 }
 

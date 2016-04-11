@@ -19,16 +19,12 @@
 #include <stdlib.h>
 #include "tinymt32.h"
 
-// Tested on 2406486510 4235788063 932445695 1
 int main(int argc, char * argv[]) {
-    if (argc < 4) {
-	printf("%s mat1 mat2 tmat [seed]\n", argv[0]);
-	return -1;
-    }
+
     tinymt32_t tinymt;
-    tinymt.mat1 = strtoul(argv[1], NULL, 16);
-    tinymt.mat2 = strtoul(argv[2], NULL, 16);
-    tinymt.tmat = strtoul(argv[3], NULL, 16);
+    tinymt.mat1 = strtoul("2406486510", NULL, 16);
+    tinymt.mat2 = strtoul("4235788063", NULL, 16);
+    tinymt.tmat = strtoul("932445695", NULL, 16);
     int seed = 1;
     uint32_t seed_array[5];
     if (argc >= 5) {
